@@ -1,27 +1,33 @@
-import { useContext } from "react";
-
 import Modal from "../UI/Modal";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
-import CartContext from "../../store/cart-context";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart";
 
 const Cart = (props) => {
-  const cartCtx = useContext(CartContext);
-
-  const totalAmount = `₩ ${cartCtx.totalAmount}`;
-  const hasItems = cartCtx.items.length > 0;
+  const dispatch = useDispatch();
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const items = useSelector((state) => state.cart.items);
+  const hasItems = items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
+    dispatch(cartActions.removeItem({ id }));
+    // cartCtx.removeItem(id);
   };
 
   const cartItemAddHandler = (item) => {
-    cartCtx.addItem({ ...item, amount: 1 });
+    dispatch(
+      cartActions.addItem({
+        ...item,
+        amount: 1,
+      })
+    );
+    // cartCtx.addItem({ ...item, amount: 1 });
   };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
-      {cartCtx.items.map((item) => (
+      {items.map((item) => (
         <CartItem
           key={item.id}
           name={item.name}
@@ -39,7 +45,7 @@ const Cart = (props) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>{totalAmount}</span>
+        <span>{`₩ ${totalAmount}`}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={props.onClose}>
