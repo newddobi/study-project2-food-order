@@ -56,6 +56,11 @@ const cartSlice = createSlice({
       state.items = updatedItems;
       state.totalAmount = updatedTotalAmount;
     },
+    clearCart: (state) => {
+      // state = initialCartState;
+      state.items = [];
+      state.totalAmount = 0;
+    },
   },
 });
 
