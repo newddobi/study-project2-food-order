@@ -3,6 +3,7 @@ import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
+import { orderActions } from "../../store/order";
 import { useState } from "react";
 import Checkout from "./Checkout";
 
@@ -35,18 +36,23 @@ const Cart = (props) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
+
+    const newOrder = {
+      id: new Date().getTime(),
+      user: userData,
+      orderedItems: items,
+    };
+
     await fetch(
       "https://udemy-food-order-study-default-rtdb.firebaseio.com/orders.json",
       {
         method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderedItems: items,
-        }),
+        body: JSON.stringify(newOrder),
       }
     );
     setIsSubmitting(false);
     setDidSubmit(true);
+    dispatch(orderActions.addOrder(newOrder));
     dispatch(cartActions.clearCart());
   };
 

@@ -120,9 +120,9 @@ const Checkout = (props) => {
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
-          Cancel
+          취소
         </button>
-        <button className={classes.submit}>Confirm</button>
+        <button className={classes.submit}>주문하기</button>
       </div>
     </form>
   );

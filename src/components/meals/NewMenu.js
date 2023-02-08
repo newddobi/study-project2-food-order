@@ -8,7 +8,7 @@ const NewMenu = (props) => {
   const descriptionInputRef = useRef();
   const amountInputRef = useRef();
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     const enteredName = nameInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
     const enteredAmount = amountInputRef.current.value;
@@ -24,6 +24,23 @@ const NewMenu = (props) => {
     if (enteredAmount.trim().length === 0) {
       amountInputRef.current.focus();
       return;
+    }
+
+    const response = await fetch(
+      "https://udemy-food-order-study-default-rtdb.firebaseio.com/meals.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: new Date().getTime(),
+          name: enteredName,
+          description: enteredDescription,
+          price: +enteredAmount,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
     }
 
     props.onAddClick({
