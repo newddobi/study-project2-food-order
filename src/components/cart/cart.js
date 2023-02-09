@@ -74,11 +74,11 @@ const Cart = (props) => {
   const modalActions = (
     <div className={classes.actions}>
       <button className={classes["button--alt"]} onClick={props.onClose}>
-        Close
+        닫기
       </button>
       {hasItems && (
         <button className={classes.button} onClick={orderHandler}>
-          Order
+          주소입력
         </button>
       )}
     </div>
@@ -88,8 +88,8 @@ const Cart = (props) => {
     <>
       {cartItems}
       <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
+        <span>총 결제금액</span>
+        <span>{totalAmount.toLocaleString()}원</span>
       </div>
       {isCheckout && (
         <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
@@ -98,14 +98,14 @@ const Cart = (props) => {
     </>
   );
 
-  const isSubmittingModalContent = <p>Sending order data...</p>;
+  const isSubmittingModalContent = <p>주문중입니다.</p>;
 
   const didSubmitModalContent = (
     <>
-      <p>Successfully sent the order!</p>
+      <p>빠르게 배달해드릴께요, 조금만 기다려주세요</p>
       <div className={classes.actions}>
         <button className={classes.button} onClick={props.onClose}>
-          Close
+          닫기
         </button>
       </div>
     </>

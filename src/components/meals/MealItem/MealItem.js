@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import MealItemForm from "./MealItemForm";
 import classes from "./MealItem.module.css";
 import { useDispatch } from "react-redux";
@@ -8,7 +6,7 @@ import { cartActions } from "../../../store/cart";
 const MealItem = (props) => {
   const dispatch = useDispatch();
 
-  const price = `₩ ${props.price}`;
+  const price = `₩ ${props.price.toLocaleString()}`;
 
   const addToCartHandler = (amount) => {
     dispatch(

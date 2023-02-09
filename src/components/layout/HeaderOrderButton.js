@@ -38,7 +38,7 @@ const HeaderOrderButton = (props) => {
 
   return (
     <button className={classes.button} onClick={props.onClick}>
-      <span>주문목록</span>
+      <span>주문내역</span>
       <span className={classes.badge}>{orders.length}</span>
     </button>
   );

@@ -1,11 +1,13 @@
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import classes from "./AvailableMeals.module.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewMenu from "./NewMenu";
 import Button from "../UI/Button";
 
 const AvailableMeals = () => {
+  console.log("AvailableMeals Component");
+
   const [dummyMeals, setDummyMeals] = useState([]);
   const [newMenuIsShown, setNewMenuIsShown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -94,10 +96,10 @@ const AvailableMeals = () => {
         <ul>{mealsList}</ul>
       </Card>
       <div className={classes.action}>
-        <Button onClick={addMealsClickHandler}>메뉴 추가</Button>
+        <Button onClick={addMealsClickHandler}>메뉴추가</Button>
       </div>
     </section>
   );
 };
 
-export default AvailableMeals;
+export default React.memo(AvailableMeals);

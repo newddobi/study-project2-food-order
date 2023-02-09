@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
@@ -9,17 +9,17 @@ function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
   const [orderIsShown, setOrderIsShown] = useState(false);
 
-  const showCartHandler = () => {
+  const showCartHandler = useCallback(() => {
     setCartIsShown(true);
-  };
+  }, []);
 
   const hideCartHandler = () => {
     setCartIsShown(false);
   };
 
-  const showOrderHandler = () => {
+  const showOrderHandler = useCallback(() => {
     setOrderIsShown(true);
-  };
+  }, []);
 
   const hideOrderHandler = () => {
     setOrderIsShown(false);
@@ -27,12 +27,12 @@ function App() {
 
   return (
     <>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      {orderIsShown && <Order onClose={hideOrderHandler} />}
       <Header onShowCart={showCartHandler} onShowOrder={showOrderHandler} />
       <main>
         <Meals />
       </main>
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      {orderIsShown && <Order onClose={hideOrderHandler} />}
     </>
   );
 }
