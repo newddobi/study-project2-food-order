@@ -18,12 +18,12 @@ const Cart = (props) => {
   const hasItems = items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
-    dispatch(cartActions.removeItem({ id }));
+    dispatch(cartActions.removeItemFromCart({ id }));
   };
 
   const cartItemAddHandler = (item) => {
     dispatch(
-      cartActions.addItem({
+      cartActions.addItemToCart({
         ...item,
         amount: 1,
       })

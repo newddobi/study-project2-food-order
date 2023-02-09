@@ -10,7 +10,7 @@ const MealItem = (props) => {
 
   const addToCartHandler = (amount) => {
     dispatch(
-      cartActions.addItem({
+      cartActions.addItemToCart({
         id: props.id,
         name: props.name,
         amount: amount,

@@ -35,7 +35,7 @@ const Order = (props) => {
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={props.onClose}>
-          Close
+          닫기
         </button>
       </div>
     </Modal>

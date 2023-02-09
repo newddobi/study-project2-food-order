@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./HeaderOrderButton.module.css";
 import { orderActions } from "../../store/order";
@@ -34,7 +34,7 @@ const HeaderOrderButton = (props) => {
     };
 
     fetchOrders();
-  }, []);
+  }, [dispatch]);
 
   return (
     <button className={classes.button} onClick={props.onClick}>
