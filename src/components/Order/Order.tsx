@@ -1,9 +1,10 @@
 import Modal from "../UI/Modal";
 import classes from "./Order.module.css";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
-const Order = (props) => {
-  const orders = useSelector((state) => state.order.orders);
+const Order: React.FC<{ onClose: () => void }> = (props) => {
+  const orders = useSelector((state: RootState) => state.order.orders);
   return (
     <Modal onClose={props.onClose}>
       {orders.map((order) => (

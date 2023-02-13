@@ -4,9 +4,10 @@ import classes from "./AvailableMeals.module.css";
 import { useEffect, useState } from "react";
 import NewMenu from "./NewMenu";
 import Button from "../UI/Button";
+import { mealType } from "../../types/meals";
 
 const AvailableMeals = () => {
-  const [dummyMeals, setDummyMeals] = useState([]);
+  const [dummyMeals, setDummyMeals] = useState<mealType[]>([]);
   const [newMenuIsShown, setNewMenuIsShown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
@@ -21,9 +22,9 @@ const AvailableMeals = () => {
         throw new Error("Something went wrong!");
       }
 
-      const responseData = await response.json();
+      const responseData: mealType[] = await response.json();
 
-      const loadedMeals = [];
+      const loadedMeals: mealType[] = [];
 
       for (const key in responseData) {
         loadedMeals.push({

@@ -6,22 +6,30 @@ import { cartActions } from "../../store/cart";
 import { orderActions } from "../../store/order";
 import { useState } from "react";
 import Checkout from "./Checkout";
+import { CartItemType } from "../../types/cart";
+import { RootState } from "../../store";
+import { userType } from "../../types/order";
 
-const Cart = (props) => {
+const Cart: React.FC<{ onClose: () => void }> = (props) => {
   const dispatch = useDispatch();
-  const [isCheckout, setIsCheckout] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [didSubmit, setDidSubmit] = useState(false);
-  const items = useSelector((state) => state.cart.items);
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const [isCheckout, setIsCheckout] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [didSubmit, setDidSubmit] = useState<boolean>(false);
+
+  const items: CartItemType[] = useSelector(
+    (state: RootState) => state.cart.items
+  );
+  const totalAmount: number = useSelector(
+    (state: RootState) => state.cart.totalAmount
+  );
 
   const hasItems = items.length > 0;
 
-  const cartItemRemoveHandler = (id) => {
+  const cartItemRemoveHandler = (id: number) => {
     dispatch(cartActions.removeItem({ id }));
   };
 
-  const cartItemAddHandler = (item) => {
+  const cartItemAddHandler = (item: CartItemType) => {
     dispatch(
       cartActions.addItem({
         ...item,
@@ -34,7 +42,7 @@ const Cart = (props) => {
     setIsCheckout(true);
   };
 
-  const submitOrderHandler = async (userData) => {
+  const submitOrderHandler = async (userData: userType) => {
     setIsSubmitting(true);
 
     const newOrder = {

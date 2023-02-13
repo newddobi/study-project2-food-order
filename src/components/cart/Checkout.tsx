@@ -1,19 +1,31 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import { userType } from "../../types/order";
 import classes from "./Checkout.module.css";
 
-const isEmpty = (value) => value.trim() === "";
-const isFiveChars = (value) => value.trim().length === 5;
+type DaumPostCodeType = {
+  address: string;
+  addressType: string;
+  bname: string;
+  buildingName: string;
+  zonecode: string;
+};
 
-const Checkout = (props) => {
-  const nameInputRef = useRef();
-  const streetInputRef = useRef();
-  const postalCodeInputRef = useRef();
-  const cityInputRef = useRef();
+const isEmpty = (value: string) => value.trim() === "";
+const isFiveChars = (value: string) => value.trim().length === 5;
+
+const Checkout: React.FC<{
+  onConfirm: (userData: userType) => void;
+  onCancel: () => void;
+}> = (props) => {
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const streetInputRef = useRef<HTMLInputElement>(null);
+  const postalCodeInputRef = useRef<HTMLInputElement>(null);
+  const cityInputRef = useRef<HTMLInputElement>(null);
 
   const open = useDaumPostcodePopup();
 
-  const handleComplete = (data) => {
+  const handleComplete = (data: DaumPostCodeType) => {
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -27,9 +39,9 @@ const Checkout = (props) => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log({ fullAddress, data }); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-    streetInputRef.current.value = fullAddress;
-    postalCodeInputRef.current.value = data.zonecode;
+
+    streetInputRef.current!.value = fullAddress;
+    postalCodeInputRef.current!.value = data.zonecode;
   };
 
   const addressClickHandler = () => {
@@ -43,13 +55,13 @@ const Checkout = (props) => {
     postalCode: true,
   });
 
-  const confirmHandler = (event) => {
+  const confirmHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const enteredName = nameInputRef.current.value;
-    const enteredStreet = streetInputRef.current.value;
-    const enteredPostalCode = postalCodeInputRef.current.value;
-    const enteredCity = cityInputRef.current.value;
+    const enteredName = nameInputRef.current!.value;
+    const enteredStreet = streetInputRef.current!.value;
+    const enteredPostalCode = postalCodeInputRef.current!.value;
+    const enteredCity = cityInputRef.current!.value;
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredStreetIsValid = !isEmpty(enteredStreet);
