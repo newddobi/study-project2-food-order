@@ -8,4 +8,5 @@ export type CartItemType = {
 export type CartStoreType = {
   items: CartItemType[];
   totalAmount: number;
+  totalQuantity: number;
 };

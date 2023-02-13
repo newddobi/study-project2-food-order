@@ -4,6 +4,7 @@ import { CartStoreType } from "../types/cart";
 const initialCartState: CartStoreType = {
   items: [],
   totalAmount: 0,
+  totalQuantity: 0,
 };
 
 const cartSlice = createSlice({
