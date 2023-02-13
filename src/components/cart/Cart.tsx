@@ -26,12 +26,12 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
   const hasItems = items.length > 0;
 
   const cartItemRemoveHandler = (id: number) => {
-    dispatch(cartActions.removeItem({ id }));
+    dispatch(cartActions.removeItemFromCart({ id }));
   };
 
   const cartItemAddHandler = (item: CartItemType) => {
     dispatch(
-      cartActions.addItem({
+      cartActions.addItemToCart({
         ...item,
         amount: 1,
       })
@@ -82,11 +82,11 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
   const modalActions = (
     <div className={classes.actions}>
       <button className={classes["button--alt"]} onClick={props.onClose}>
-        Close
+        닫기
       </button>
       {hasItems && (
         <button className={classes.button} onClick={orderHandler}>
-          Order
+          주소입력
         </button>
       )}
     </div>
@@ -96,8 +96,8 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
     <>
       {cartItems}
       <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
+        <span>총 결제금액</span>
+        <span>{totalAmount.toLocaleString()}원</span>
       </div>
       {isCheckout && (
         <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
@@ -106,14 +106,14 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
     </>
   );
 
-  const isSubmittingModalContent = <p>Sending order data...</p>;
+  const isSubmittingModalContent = <p>주문중입니다.</p>;
 
   const didSubmitModalContent = (
     <>
-      <p>Successfully sent the order!</p>
+      <p>빠르게 배달해드릴께요, 조금만 기다려주세요</p>
       <div className={classes.actions}>
         <button className={classes.button} onClick={props.onClose}>
-          Close
+          닫기
         </button>
       </div>
     </>

@@ -1,7 +1,7 @@
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import classes from "./AvailableMeals.module.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewMenu from "./NewMenu";
 import Button from "../UI/Button";
 import { mealType } from "../../types/meals";
@@ -24,7 +24,7 @@ const AvailableMeals = () => {
 
       const responseData: mealType[] = await response.json();
 
-      const loadedMeals: mealType[] = [];
+      const loadedMeals: any = [];
 
       for (const key in responseData) {
         loadedMeals.push({
@@ -68,7 +68,7 @@ const AvailableMeals = () => {
     setNewMenuIsShown(false);
   };
 
-  const addNewMenu = (newMenu) => {
+  const addNewMenu = (newMenu: any) => {
     setDummyMeals((prev) => prev.concat(newMenu));
   };
 
@@ -95,10 +95,10 @@ const AvailableMeals = () => {
         <ul>{mealsList}</ul>
       </Card>
       <div className={classes.action}>
-        <Button onClick={addMealsClickHandler}>메뉴 추가</Button>
+        <Button onClick={addMealsClickHandler}>메뉴추가</Button>
       </div>
     </section>
   );
 };
 
-export default AvailableMeals;
+export default React.memo(AvailableMeals);

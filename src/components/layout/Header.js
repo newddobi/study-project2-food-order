@@ -1,10 +1,11 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import HeaderOrderButton from "./HeaderOrderButton";
 import HeaderCartButton from "./HeaderCartButton";
 import mealsImage from "../../assets/meals.jpg";
 import classes from "./Header.module.css";
 
 const Header = (props) => {
+  console.log("Header Component");
   return (
     <Fragment>
       <header className={classes.header}>
@@ -21,4 +22,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

@@ -7,7 +7,7 @@ const CartItem: React.FC<{
   onRemove: () => void;
   onAdd: () => void;
 }> = (props) => {
-  const price = `₩ ${props.price}`;
+  const price = `₩ ${props.price.toLocaleString()}`;
 
   return (
     <li className={classes["cart-item"]}>
