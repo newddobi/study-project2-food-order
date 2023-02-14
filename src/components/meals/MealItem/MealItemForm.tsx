@@ -3,14 +3,17 @@ import { useRef, useState } from "react";
 import Input from "../../UI/Input";
 import classes from "./MealItemForm.module.css";
 
-const MealItemForm = (props) => {
-  const [amountIsValid, setAmountIsValid] = useState(true);
-  const amountInputRef = useRef();
+const MealItemForm: React.FC<{
+  id: number;
+  onAddToCart: (amount: number) => void;
+}> = (props) => {
+  const [amountIsValid, setAmountIsValid] = useState<boolean>(true);
+  const amountInputRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (event) => {
+  const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const enteredAmount = amountInputRef.current.value;
+    const enteredAmount = amountInputRef.current!.value;
     const enteredAmountNumber = +enteredAmount;
 
     if (

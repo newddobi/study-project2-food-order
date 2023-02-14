@@ -3,26 +3,29 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import classes from "./NewMenu.module.css";
 
-const NewMenu = (props) => {
-  const nameInputRef = useRef();
-  const descriptionInputRef = useRef();
-  const amountInputRef = useRef();
+const NewMenu: React.FC<{
+  onClose: () => void;
+  onAddClick: (menu: any) => void;
+}> = (props) => {
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const descriptionInputRef = useRef<HTMLInputElement>(null);
+  const amountInputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = async () => {
-    const enteredName = nameInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
-    const enteredAmount = amountInputRef.current.value;
+    const enteredName = nameInputRef.current!.value;
+    const enteredDescription = descriptionInputRef.current!.value;
+    const enteredAmount = amountInputRef.current!.value;
 
     if (!enteredName) {
-      nameInputRef.current.focus();
+      nameInputRef.current!.focus();
       return;
     }
     if (!enteredDescription) {
-      descriptionInputRef.current.focus();
+      descriptionInputRef.current!.focus();
       return;
     }
     if (enteredAmount.trim().length === 0) {
-      amountInputRef.current.focus();
+      amountInputRef.current!.focus();
       return;
     }
 

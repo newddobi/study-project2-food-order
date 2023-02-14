@@ -3,12 +3,17 @@ import classes from "./MealItem.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 
-const MealItem = (props) => {
+const MealItem: React.FC<{
+  price: number;
+  id: number;
+  name: string;
+  description: string;
+}> = (props) => {
   const dispatch = useDispatch();
 
   const price = `₩ ${props.price.toLocaleString()}`;
 
-  const addToCartHandler = (amount) => {
+  const addToCartHandler = (amount: number) => {
     dispatch(
       cartActions.addItemToCart({
         id: props.id,
