@@ -1,9 +1,10 @@
 import { uiActions } from "./ui";
 import { cartActions } from "./cart";
 import { CartStoreType } from "../types/cart";
+import { AppDispatch } from ".";
 
 export const fetchCartData = () => {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     const fetchData = async () => {
       const response = await fetch(
         "https://udemy-food-order-study-default-rtdb.firebaseio.com/cart.json"
@@ -39,7 +40,7 @@ export const fetchCartData = () => {
 };
 
 export const sendCartData = (cart: CartStoreType) => {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(
       uiActions.showNotification({
         status: "pending",
